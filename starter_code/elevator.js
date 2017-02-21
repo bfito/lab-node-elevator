@@ -19,23 +19,32 @@ class Elevator {
    }
 
   update() {
+    _passengersEnter(person);
+    _passengersLeave(person);
     this.log();
     console.log();
+    stop();
    }
 
   _passengersEnter(person) {
-    this.passengers.push(person);
-    indexOfPerson = passengers.indexOf(person);
-    this.requests.push(this.Person[indexOfPerson].destinationFloor);
-    this.waitingList.splice(indexOfPerson,1);
+    for (let i = 0; i < waitingList.length; i++) {
+      if (Person.originFloor[i] === this.floor) {
+        this.passengers.push(person);
+          indexOfPerson = passengers.indexOf(person);
+        this.waitingList.splice(indexOfPerson,1);
+        this.requests.push(this.Person[indexOfPerson].destinationFloor);
+      }
     console.log(`${Person.name} has enter the elevator`);
    }
+ }
 
   _passengersLeave(person) {
-    indexOfPerson = passengers.indexOf(person);
-    if (Person.destinationFloor === Person.originFloor) {
-    passengers.splice(indexOfPerson,1);
-    console.log(`${Person.name} has left the elevator`);
+    for (let i = 0; i < passengers.length; i++) {
+    if (Person.destinationFloor === this.floor) {
+      indexOfPerson = passengers.indexOf(person);
+      passengers.splice(indexOfPerson,1);
+      }
+      console.log(`${Person.name} has left the elevator`);
     }
   }
 
@@ -61,4 +70,4 @@ class Elevator {
    }
 }
 
-module.exports = Elevator;
+// module.exports = Elevator;
